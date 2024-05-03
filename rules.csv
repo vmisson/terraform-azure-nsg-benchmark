@@ -1,0 +1,3 @@
+name,priority,direction,access,protocol,source_port_range,destination_port_range,source_address_prefix,destination_address_prefix
+in-test101,101,Inbound,Allow,Tcp,101,101,*,*
+out-test101,101,Outbound,Allow,Tcp,101,101,*,*

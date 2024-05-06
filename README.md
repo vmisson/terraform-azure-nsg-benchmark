@@ -41,7 +41,11 @@ The results are in seconds. The results are the smallest value of 2 runs (very l
 | NSG creation with 1000 rules  | Plan  | 17  | 14  |
 | NSG creation with 1000 rules  | Apply  | 95  | 541  |
 | NSG creation with 1000 rules  | Destroy  | 119  | 1631  |
-|||||
+
+![alt text](images/image-1.png)
+
+| Test  | Action  | Benchmark Network Security Group | Benchmark Network Security Rule |
+|---|---|---:|---:|
 | NSG creation with 2 rules  | Plan  | 3  | 5  |
 | NSG creation with 2 rules  | Apply  | 20  | 21  |
 |||||
@@ -54,7 +58,11 @@ The results are in seconds. The results are the smallest value of 2 runs (very l
 | NSG update from 500 rules to 1000 rules  | Plan  | 36  | 88  |
 | NSG update from 500 rules to 1000 rules  | Apply  | 107  | 400  |
 
-![result graph](images/results.png)
+![alt text](images/image-2.png)
+
+If we compare the ratio between the two methods, we can see that security_group is around 5 times faster than security_rule on ceation and 4 times faster on update.
+
+![alt text](images/image-3.png)
 
 # Conclusion
 

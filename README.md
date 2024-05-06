@@ -28,6 +28,8 @@ The action is triggered by a push to the main branch. The action will deploy the
 
 The results are in seconds. The results are the smallest value of 2 runs (very little difference between the two runs).
 
+## Creation from scratch
+
 | Test  | Action  | Benchmark Network Security Group | Benchmark Network Security Rule |
 |---|---|---:|---:|
 | NSG creation with 200 rules  | Plan  | 6  | 6  |
@@ -43,6 +45,8 @@ The results are in seconds. The results are the smallest value of 2 runs (very l
 | NSG creation with 1000 rules  | Destroy  | 119  | 1631  |
 
 ![alt text](images/image-1.png)
+
+## Update
 
 | Test  | Action  | Benchmark Network Security Group | Benchmark Network Security Rule |
 |---|---|---:|---:|
@@ -60,6 +64,7 @@ The results are in seconds. The results are the smallest value of 2 runs (very l
 
 ![alt text](images/image-2.png)
 
+## Comparison
 If we compare the ratio between the two methods, we can see that security_group is around 5 times faster than security_rule on ceation and 4 times faster on update.
 
 ![alt text](images/image-3.png)

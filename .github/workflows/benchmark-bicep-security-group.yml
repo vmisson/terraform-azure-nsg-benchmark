@@ -95,7 +95,7 @@ jobs:
         
       - name: Bicep Apply Update 2 to 200 Rules
         id: update-create-200-rules
-        run: az deployment sub create-if --name nsg --location westeurope --template-file main-200.bicep
+        run: az deployment sub create --name nsg --location westeurope --template-file main-200.bicep
         working-directory: ./bicep/networkSecurityGroups     
 
       - name: Bicep Plan Update 200 to 500 Rules

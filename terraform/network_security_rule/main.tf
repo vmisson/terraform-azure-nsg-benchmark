@@ -24,13 +24,25 @@ variable "rules_file" {
   default     = "../rules.csv"
 }
 
+variable "resource_group_name" {
+  description = "The name of the resource group"
+  type        = string
+  default     = "rg-terraform-network-security-rule"
+}
+
+variable "location" {
+  description = "The location for the resources"
+  type        = string
+  default     = "westeurope"
+}
+
 locals {
   rules_csv = csvdecode(file(var.rules_file))
 }
 
 resource "azurerm_resource_group" "this" {
-  name     = "rg-network-security-rule"
-  location = "westeurope"
+  name     = var.resource_group_name
+  location = var.location
 }
 
 resource "azurerm_network_security_group" "this" {

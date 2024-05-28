@@ -55,13 +55,65 @@ jobs:
         run: az deployment sub what-if --name nsg --location westeurope --template-file main-500.bicep
         working-directory: ./bicep/networkSecurityGroups
 
-      - name: Bicep Create 200 Rules
+      - name: Bicep Create 500 Rules
         id: create-500-rules
         run: az deployment sub create --name nsg --location westeurope --template-file main-500.bicep
         working-directory: ./bicep/networkSecurityGroups
 
-      - name: Cleanup 200 Rules
+      - name: Cleanup 500 Rules
         id: cleanup-500-rules
-        run: az group delete --name rg-bicep-networkSecurityGroups --yes 
+        run: az group delete --name rg-bicep-networkSecurityGroups --yes
 
- 
+      - name: Bicep What-if 1000 Rules
+        id: what-if-1000-rules
+        run: az deployment sub what-if --name nsg --location westeurope --template-file main-1000.bicep
+        working-directory: ./bicep/networkSecurityGroups
+
+      - name: Bicep Create 1000 Rules
+        id: create-1000-rules
+        run: az deployment sub create --name nsg --location westeurope --template-file main-1000.bicep
+        working-directory: ./bicep/networkSecurityGroups
+
+      - name: Cleanup 1000 Rules
+        id: cleanup-1000-rules
+        run: az group delete --name rg-bicep-networkSecurityGroups --yes         
+
+      - name: Bicep Plan 2 Rules
+        id: update-what-if-2-rules
+        run: az deployment sub what-if --name nsg --location westeurope --template-file main.bicep
+        working-directory: ./bicep/networkSecurityGroups   
+        
+      - name: Bicep Apply 2 Rules
+        id: update-create-2-rules
+        run: az deployment sub create --name nsg --location westeurope --template-file main.bicep
+        working-directory: ./bicep/networkSecurityGroups
+
+      - name: Bicep Plan Update 2 to 200 Rules
+        id: update-what-if-200-rules
+        run: az deployment sub what-if --name nsg --location westeurope --template-file main-200.bicep
+        working-directory: ./bicep/networkSecurityGroups     
+        
+      - name: Bicep Apply Update 2 to 200 Rules
+        id: update-create-200-rules
+        run: az deployment sub create-if --name nsg --location westeurope --template-file main-200.bicep
+        working-directory: ./bicep/networkSecurityGroups     
+
+      - name: Bicep Plan Update 200 to 500 Rules
+        id: update-what-if-500-rules
+        run: az deployment sub what-if --name nsg --location westeurope --template-file main-500.bicep
+        working-directory: ./bicep/networkSecurityGroups        
+        
+      - name: Bicep Update 200 to 500 Rules
+        id: update-create-500-rules
+        run: az deployment sub create --name nsg --location westeurope --template-file main-500.bicep
+        working-directory: ./bicep/networkSecurityGroups
+        
+      - name: Bicep Plan Update 500 to 1000 Rules
+        id: update-what-if-1000-rules
+        run: az deployment sub what-if --name nsg --location westeurope --template-file main-1000.bicep
+        working-directory: ./bicep/networkSecurityGroups       
+
+      - name: Bicep Update 500 to 1000 Rules
+        id: update-create-1000-rules
+        run: az deployment sub create --name nsg --location westeurope --template-file main-1000.bicep
+        working-directory: ./bicep/networkSecurityGroups

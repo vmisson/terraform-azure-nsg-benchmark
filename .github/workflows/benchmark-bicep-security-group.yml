@@ -30,7 +30,11 @@ jobs:
 
       - name: Initial Cleanup
         id: cleanup
-        run: [ `az group exists --name rg-bicep-networkSecurityGroups` ] || `az group delete --name rg-bicep-networkSecurityGroups --yes`
+        run: |
+          if $(az group exists --name rg-bicep-networkSecurityGroups) ; then
+            az group delete --name rg-bicep-networkSecurityGroups --yes
+          fi
+        shell: bash
 
       - name: Bicep What-if 200 Rules
         id: what-if-200-rules

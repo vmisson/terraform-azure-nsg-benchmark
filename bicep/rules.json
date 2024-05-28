@@ -1,0 +1,29 @@
+[
+    {
+      "name": "in-test101",
+      "properties": {
+        "protocol": "*",
+        "sourcePortRange": "101",
+        "destinationPortRange": "101",
+        "sourceAddressPrefix": "*",
+        "destinationAddressPrefix": "*",
+        "access": "Allow",
+        "priority": 101,
+        "direction": "Inbound"
+      }
+    },
+    {
+      "name": "out-test101",
+      "properties": {        
+        "protocol": "*",
+        "sourcePortRange": "101",
+        "destinationPortRange": "101",
+        "sourceAddressPrefix": "*",
+        "destinationAddressPrefix": "*",
+        "access": "Allow",
+        "priority": 101,
+        "direction": "Outbound"
+      }
+    }
+]
+

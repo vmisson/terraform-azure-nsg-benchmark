@@ -3,7 +3,7 @@ targetScope='subscription'
 param resourceGroupName string = 'rg-bicep-networkSecurityRules'
 param location string = 'westeurope'
 param nsgName string = 'nsg'
-var nsgconfig = loadJsonContent('../rules.json')
+var nsgconfig = loadJsonContent('../rules-1000.json')
 
 
 resource rg 'Microsoft.Resources/resourceGroups@2022-09-01' = {

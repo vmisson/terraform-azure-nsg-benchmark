@@ -37,3 +37,4 @@ module nsgRules '../modules/rule/main.bicep' = [for rule in nsgconfig: {
   ]
 }
 ]
+

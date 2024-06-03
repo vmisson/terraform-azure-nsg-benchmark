@@ -35,7 +35,49 @@ jobs:
             az group delete --name rg-bicep-networkSecurityRules --yes
           fi
         shell: bash
-        
+
+      - name: Bicep What-if 200 Rules
+        id: what-if-200-rules
+        run: az deployment sub what-if --name rule --location westeurope --template-file main-200.bicep
+        working-directory: ./bicep/securityRules
+
+      - name: Bicep Create 200 Rules
+        id: create-200-rules
+        run: az deployment sub create --name rule --location westeurope --template-file main-200.bicep
+        working-directory: ./bicep/securityRules
+
+      - name: Cleanup 200 Rules
+        id: cleanup-200-rules
+        run: az group delete --name rg-bicep-networkSecurityRules --yes
+
+      - name: Bicep What-if 500 Rules
+        id: what-if-500-rules
+        run: az deployment sub what-if --name rule --location westeurope --template-file main-500.bicep
+        working-directory: ./bicep/securityRules
+
+      - name: Bicep Create 500 Rules
+        id: create-500-rules
+        run: az deployment sub create --name rule --location westeurope --template-file main-500.bicep
+        working-directory: ./bicep/securityRules
+
+      - name: Cleanup 500 Rules
+        id: cleanup-500-rules
+        run: az group delete --name rg-bicep-networkSecurityRules --yes
+
+      - name: Bicep What-if 1000 Rules
+        id: what-if-1000-rules
+        run: az deployment sub what-if --name rule --location westeurope --template-file main-1000.bicep
+        working-directory: ./bicep/securityRules
+
+      - name: Bicep Create 1000 Rules
+        id: create-1000-rules
+        run: az deployment sub create --name rule --location westeurope --template-file main-1000.bicep
+        working-directory: ./bicep/securityRules
+
+      - name: Cleanup 1000 Rules
+        id: cleanup-1000-rules
+        run: az group delete --name rg-bicep-networkSecurityRules --yes         
+
       - name: Bicep Plan 2 Rules
         id: update-what-if-2-rules
         run: az deployment sub what-if --name rule --location westeurope --template-file main.bicep

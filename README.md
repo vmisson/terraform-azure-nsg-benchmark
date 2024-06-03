@@ -31,7 +31,8 @@ The action is triggered by a push to the main branch if change is dedected on co
 
 # Results
 
-The results are in seconds. The results are the smallest value of multiple runs.
+The results are in seconds. The results are the smallest value of multiple runs.  
+x = test failed after multiple runs.
 
 ## Creation from scratch
 
@@ -56,16 +57,16 @@ I have remove from the graph the destroy, Bicep is not able to destroy the resou
 
 | Test  | Action  | Terraform - Security Group | Terraform - Security Rule | Bicep - Security Group | Bicep - Security Rule |
 |---|---|---:|---:|---:|---:|
-| NSG with 2 rules  | Plan  | 3  | 5  | 21 | x |
-| NSG with 2 rules  | Apply  | 20  | 21  | 42 | x |
+| NSG with 2 rules  | Plan  | 3  | 5  | 21 | 23 |
+| NSG with 2 rules  | Apply  | 20  | 21  | 42 | 78 |
 |||||||
-| Update from 2 rules to 200 rules  | Plan  | 6  | 5  | 21 | x |
-| Update from 2 rules to 200 rules  | Apply  | 15  | 87  | 43 | x |
+| Update from 2 rules to 200 rules  | Plan  | 6  | 5  | 21 | 52 |
+| Update from 2 rules to 200 rules  | Apply  | 15  | 87  | 43 | 141 |
 |||||||
-| Update from 200 rules to 500 rules  | Plan  | 14  | 22  | 21 | x |
-| Update from 200 rules to 500 rules  | Apply  | 38  | 173  | 43 | x |
+| Update from 200 rules to 500 rules  | Plan  | 14  | 22  | 21 | 176 |
+| Update from 200 rules to 500 rules  | Apply  | 38  | 173  | 43 | 391 |
 |||||||
-| Update from 500 rules to 1000 rules  | Plan  | 36  | 88  | 22 | x |
+| Update from 500 rules to 1000 rules  | Plan  | 36  | 88  | 22 | 21 |
 | Update from 500 rules to 1000 rules  | Apply  | 107  | 400  | 43 | x |
 
 ![result graph](images/image-2.png)
@@ -84,11 +85,9 @@ Managing NSG with security group is faster than managing NSG with security rule.
 
 ### Terraform vs Bicep
 
-Both technologies are not working the same way. In Terraform, working in security group level is faster than working in security rule level. In Bicep, the difference is less significant. The security group is faster than the security rule but the difference is not as significant as in Terraform.
-
 If we focus on security group option, Terraform is faster than Bicep for small number of rules (until 500 rules). For large number of rules, Bicep is faster than Terraform.
 
-Security rules option with Terraform provide the worst performance in particular for large number of rules. Bicep is really stable in terms of performance no matter the number of rules.
+Security rules option with Terraform or Bicep provide bad performance in particular for large number of rules. As Bicep is generated one ARM deployment for each rule, I was not able to test the creation of NSG with high number of rules because at least one deployment failed.
 
 ## Network traffic
 
@@ -106,8 +105,8 @@ This result is not surprising. The network_security_rule resource is creating on
 
 # Conclusion
 
-In Terraform, using network_security_group resource is faster than the network_security_rule resource. The difference is more significant when creating, updating or deleting a large number of rules.
+In Terraform or in Bicep, working on security group resource is faster than the security rule resource. The difference is more significant when creating or updating a large number of rules.
 
-For Bicep, the difference is less significant. Using networkSecurityGroup resource is really stable in terms of time no matter the number of rules. The networkSecurityRule resource is a bit slower but the difference is not as significant as in Terraform.
+Terraform seems to be faster for small number (1-500) of rules and Bicep for large number of rules (500-1000).
 
-The behavior of the two ressources to manage NSG is not the same. The network_security_group resource will remove any rule not defined in the Terraform script. The network_security_rule resource will only manage the rules defined in the Terraform script (additional rules can be managed on another script or using the portal).
+The behavior of the two ressources to manage NSG is not the same. Working on  security group level will remove any rule not defined in the script. The security rule level will only manage the rules defined in the script (additional rules can be managed on another script or using the portal).
